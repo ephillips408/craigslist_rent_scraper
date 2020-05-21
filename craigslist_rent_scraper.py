@@ -44,17 +44,17 @@ def simple_rent_scraper(craig_prefix):
             posting_time = listing.find('time', {'class' : 'result-date'})['datetime']
 
             rental_num += 1
-            rental_dict[rental_num] = [title, neighborhood, bedrooms, sqft, posting_time]
+            rental_dict[rental_num] = [title, neighborhood, bedrooms, price, sqft, posting_time]
         # End of for loop
         url_tag = rent_soup.find('a', {'class' : 'button next'})['href']
 
         if url_tag:
             url = f'https://{craig_prefix}.craigslist.org/d/apts-housing-for-rent/search/apa' + url_tag
-            print (url)
+            # print (url)
         else:
             break
         # End of while loop
     rentals_df = pd.DataFrame.from_dict(rental_dict,
-                                    orient = 'index',
-                                    columns = ['Title', 'Neighborhood', 'Bedrooms', 'Square Feet', 'Posting Time'])
-    return rentals_df         
+                                        orient = 'index',
+                                        columns = ['Title', 'Neighborhood', 'Bedrooms', 'Price','Square Feet', 'Posting Time'])
+    return rentals_df
