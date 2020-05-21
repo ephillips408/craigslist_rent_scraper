@@ -24,7 +24,6 @@ def simple_rent_scraper(craig_prefix):
             neighborhood_tag = listing.find('span', {'class' : 'result-hood'})
             neighborhood = neighborhood_tag.text[2:-1] if neighborhood_tag else 'N/A'
 
-
             if beds_tag:
                 bedrooms = int(beds_tag.text.strip().split()[0][0]) if beds_tag.text.strip().split()[0][1:3] == 'br' else 'N/A'
             else:
